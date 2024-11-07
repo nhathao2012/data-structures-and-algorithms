@@ -1,15 +1,23 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.println("Hello and welcome!");
+        Book[] books = new Book[5];
+        books[0] = new Book(1, "Java Programming", "John Doe");
+        books[1] = new Book(2, "Effective Java", "Joshua Bloch");
+        books[2] = new Book(3, "Clean Code", "Robert Martin");
+        books[3] = new Book(4, "Design Patterns", "Erich Gamma");
+        books[4] = new Book(5, "Refactoring", "Martin Fowler");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        System.out.println("Before sorting:");
+        for (Book book : books) {
+            System.out.println(book);
         }
+
+        BookMergeSort.sort(books, 0, books.length - 1);
+
+        System.out.println("\nAfter sorting:");
+        for (Book book : books) {
+            System.out.println(book);
+        }
+        BookBinarySearch.searchBooks(books);
     }
 }
