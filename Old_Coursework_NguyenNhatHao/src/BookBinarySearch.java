@@ -3,13 +3,13 @@ import java.util.Scanner;
 public class BookBinarySearch {
     public static void searchBooks(Book[] books) {
         Scanner scanner = new Scanner(System.in);
-        String input;
+        String input = "";
 
         // Sort the array before performing binary search
         BookMergeSort.sort(books, 0, books.length - 1);
 
         do {
-            System.out.print("Enter a character or full title to search for (or type 'exit' to quit): ");
+            System.out.print("\nEnter a character or full title to search for (or type 'exit' to quit): ");
             input = scanner.nextLine();
 
             if (!input.equalsIgnoreCase("exit")) {
@@ -23,7 +23,7 @@ public class BookBinarySearch {
     private static void search(Book[] books, String input) {
         boolean found = false;
 
-        System.out.println("Books containing '" + input + "' in their titles:");
+        System.out.println("\nBooks containing '" + input + "' in their titles:");
         for (Book book : books) {
             if (book.getTitle().toLowerCase().contains(input.toLowerCase())) {
                 System.out.println("Book found: " + book);
