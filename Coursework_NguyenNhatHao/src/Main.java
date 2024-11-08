@@ -1,23 +1,46 @@
+import java.util.Scanner;
+import java.util.Stack;
+
 public class Main {
+    public static Stack<Book> stack = new Stack<>();
+    public static Stack<Book> getBooks() {
+        return stack;
+    }
     public static void main(String[] args) {
-        Book[] books = new Book[5];
-        books[0] = new Book(1, "Java Programming", "John Doe");
-        books[1] = new Book(2, "Effective Java", "Joshua Bloch");
-        books[2] = new Book(3, "Clean Code", "Robert Martin");
-        books[3] = new Book(4, "Design Patterns", "Erich Gamma");
-        books[4] = new Book(5, "Refactoring", "Martin Fowler");
+        // Adding 5 books to the stack
+        stack.push(new Book("Harry Potter", "J.K. Rowling"));
+        stack.push(new Book("The Hobbit", "J.R.R. Tolkien"));
+        stack.push(new Book("1984", "George Orwell"));
+        stack.push(new Book("The Great Gatsby", "F. Scott Fitzgerald"));
+        stack.push(new Book("To Kill a Mockingbird", "Harper Lee"));
 
-        System.out.println("Before sorting:");
-        for (Book book : books) {
-            System.out.println(book);
+        Scanner scanner = new Scanner(System.in);
+        String command;
+
+        while (true) {
+            System.out.println("\nCommands:");
+            System.out.println("book - Go to Book operations");
+            System.out.println("sort - Go to BookMergeSort operations");
+            System.out.println("search - Go to BookBinarySearch operations");
+            System.out.println("exit - Exit the program");
+            System.out.println("\nType your command (or -help after any command for further instructions):");
+
+            command = scanner.nextLine();
+            switch (command) {
+                case "book":
+                    Book.main(new String[]{});
+                    break;
+                case "sort":
+                    BookMergeSort.main(new String[]{});
+                    break;
+                case "search":
+                    BookBinarySearch.main(new String[]{});
+                    break;
+                case "exit":
+                    return;
+                default:
+                    System.out.println("Invalid command. Try again.");
+            }
         }
-
-        BookMergeSort.sort(books, 0, books.length - 1);
-
-        System.out.println("\nAfter sorting:");
-        for (Book book : books) {
-            System.out.println(book);
-        }
-        BookBinarySearch.searchBooks(books);
     }
 }

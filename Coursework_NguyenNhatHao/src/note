@@ -1,0 +1,16 @@
+
+
+
+Code java cho tôi để thực hiện các tác vụ CURD với stack, binary search:
+1/ tạo file main.java chứa lệnh khởi tạo stack chứa sẵn 5 cuốn sách dùng cho các task sau:
+task1/ class book chứa cấu trúc cho cuốn sách gồm: ID sách (tự tăng dần khi thêm mỗi 1 cuốn sách), title, author. Trong đây chứa các lệnh như liệt kê(--list), thêm(--add) vaào stack trong nhu trong Main.java, xóa(--remove), cập nhật(--update) thông tin sách theo lệnh  như sau: book --[command]. nếu user nhập book --help thì sẽ hiển thị các command có sẵn cho user.
+task2/ file bookbinarysearch.java chứa code java tìm kiếm sách chỉ dùng binary search để tìm kiếm. trong đây chứa các lệnh như tìm kiếm thông qua title(--title) và tìm kiếm thông qua author(--author). Tìm kiếm bắt đầu theo lệnh sau: search --[command]. nếu nhập search --help thì hiển thị các lệnh có sẵn cho user.
+task3/ file bookmergesort.java chứa java code sắp xếp các sách theo title (--title) và theo tên author (--author). dùng lệnh như sau sort --[command]. nếu nhập sort --help thì hiển thị các lệnh sort có sẵn cho user.
+
+
+Hình ảnh hồ sơ
+Bạn là sinh viên loại giỏi môn cấu trúc dữ liệu và giải thuật hãy code java cho tôi để thực hiện các tác vụ CURD cho stack và binary search:
+1/ tạo file main.java chứa lệnh stack để push sẵn 5 cuốn sách dùng cho các task sau:
+task1/ class book chứa cấu trúc cho cuốn sách gồm: ID sách (tự tăng dần khi thêm mỗi 1 cuốn sách), title, author. Trong đây chứa các lệnh như liệt kê(--list), thêm(--add) vaào stack trong nhu trong Main.java, xóa(--remove), cập nhật(--update) thông tin sách theo lệnh  như sau: book --[command]. nếu user nhập book --help thì sẽ hiển thị các command có sẵn cho user.
+task2/ file bookbinarysearch.java chứa code java tìm kiếm sách chỉ dùng binary search để tìm kiếm. trong đây chứa các lệnh như tìm kiếm thông qua title(--title) và tìm kiếm thông qua author(--author). Tìm kiếm bắt đầu theo lệnh sau: search --[command]. nếu nhập search --help thì hiển thị các lệnh có sẵn cho user.
+task3/ file bookmergesort.java chứa java code sắp xếp các sách theo title (--title) và theo tên author (--author). dùng lệnh như sau sort --[command]. nếu nhập sort --help thì hiển thị các lệnh sort có sẵn cho user.

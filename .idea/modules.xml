@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/BaitapJava/BaitapJava.iml" filepath="$PROJECT_DIR$/BaitapJava/BaitapJava.iml" />
       <module fileurl="file://$PROJECT_DIR$/Coursework_NguyenNhatHao/Coursework_NguyenNhatHao.iml" filepath="$PROJECT_DIR$/Coursework_NguyenNhatHao/Coursework_NguyenNhatHao.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/data-structures-and-algorithms.iml" filepath="$PROJECT_DIR$/.idea/data-structures-and-algorithms.iml" />
     </modules>
