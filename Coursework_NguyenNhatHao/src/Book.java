@@ -82,11 +82,28 @@ public class Book {
     }
 
     private static void removeBook() {
-        if (!stack.isEmpty()) {
-            stack.pop();
-            System.out.println("Top book removed.");
+        if(!stack.isEmpty()) {
+            listBooks();
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter the title of the book to remove");
+            String title = sc.nextLine().toLowerCase();
+
+            Book bookRemove = null;
+            for (Book book : stack) {
+                if (book.getTitle().toLowerCase().equals(title)) {
+                    bookRemove = book;
+                    break;
+                }
+            }
+
+            if (bookRemove != null) {
+                stack.remove(bookRemove);
+                System.out.println("Book removed: "+bookRemove.getTitle());
+            } else {
+                System.out.println("Book not found.");
+            }
         } else {
-            System.out.println("No books to remove.");
+            System.out.println("No book to remove");
         }
     }
 

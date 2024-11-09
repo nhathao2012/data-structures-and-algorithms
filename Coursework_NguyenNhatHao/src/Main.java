@@ -10,9 +10,9 @@ public class Main {
         // Adding 5 books to the stack
         stack.push(new Book("Harry Potter", "J.K. Rowling"));
         stack.push(new Book("The Hobbit", "J.R.R. Tolkien"));
-        stack.push(new Book("1984", "George Orwell"));
-        stack.push(new Book("The Great Gatsby", "F. Scott Fitzgerald"));
-        stack.push(new Book("To Kill a Mockingbird", "Harper Lee"));
+        stack.push(new Book("1984ts", "George Orwell"));
+        stack.push(new Book("The Greats Gatsby", "F. Scott Fitzgerald"));
+        stack.push(new Book("To Kill a Mockingbirdts", "Harper Lee"));
 
         Scanner scanner = new Scanner(System.in);
         String command;
@@ -23,7 +23,7 @@ public class Main {
             System.out.println("sort - Go to BookMergeSort operations");
             System.out.println("search - Go to BookBinarySearch operations");
             System.out.println("exit - Exit the program");
-            System.out.println("\nType your command (or -help after any command for further instructions):");
+            System.out.println("\nType your command");
 
             command = scanner.nextLine();
             switch (command) {

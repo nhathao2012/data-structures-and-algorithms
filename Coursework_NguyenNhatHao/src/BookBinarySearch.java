@@ -2,6 +2,9 @@ import java.util.*;
 
 public class BookBinarySearch {
 
+    // Assuming Main.getBooks() returns a Stack of Book objects
+    private static Stack<Book> stack = Main.getBooks();
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String command;
@@ -9,21 +12,26 @@ public class BookBinarySearch {
         System.out.println("Enter command (search -help for commands):");
         command = scanner.nextLine();
 
-        if (command.startsWith("search")) {
-            handleSearchCommands(command.split(" "));
-        } else if (command.equals("exit")) {
-            return;
+        while (!command.equals("exit")) {
+            if (command.startsWith("search")) {
+                handleSearchCommands(command.split(" ", 3)); // Split into at most 3 parts
+            } else {
+                System.out.println("Invalid command.");
+                showHelp();
+            }
+            System.out.println("Enter next command:");
+            command = scanner.nextLine();
         }
     }
 
     private static void handleSearchCommands(String[] args) {
-        if (args.length > 1) {
+        if (args.length > 2) {
             switch (args[1]) {
                 case "-title":
-                    searchByTitle();
+                    searchByTitle(args[2]);
                     break;
                 case "-author":
-                    searchByAuthor();
+                    searchByAuthor(args[2]);
                     break;
                 case "-help":
                     showHelp();
@@ -40,17 +48,15 @@ public class BookBinarySearch {
 
     private static void showHelp() {
         System.out.println("Available commands:");
-        System.out.println("-title  : Search book by title");
-        System.out.println("-author : Search book by author");
+        System.out.println("search -title [book_title]  : Search book by title");
+        System.out.println("search -author [book_author] : Search book by author");
     }
 
-    private static void searchByTitle() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter book title to search:");
-        String title = scanner.nextLine();
+    private static void searchByTitle(String title) {
+        title = title.toLowerCase();
 
-        List<Book> books = new ArrayList<>(Main.stack);
-        Collections.sort(books, (b1, b2) -> b1.getTitle().compareTo(b2.getTitle()));
+        Stack<Book> books = (Stack<Book>) stack.clone(); // Clone the stack to preserve original order
+        BookMergeSort.sortByTitle(books);
 
         int index = binarySearchByTitle(books, title);
         if (index != -1) {
@@ -60,13 +66,11 @@ public class BookBinarySearch {
         }
     }
 
-    private static void searchByAuthor() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter book author to search:");
-        String author = scanner.nextLine();
+    private static void searchByAuthor(String author) {
+        author = author.toLowerCase();
 
-        List<Book> books = new ArrayList<>(Main.stack);
-        Collections.sort(books, (b1, b2) -> b1.getAuthor().compareTo(b2.getAuthor()));
+        Stack<Book> books = (Stack<Book>) stack.clone(); // Clone the stack to preserve original order
+        BookMergeSort.sortByAuthor(books);
 
         int index = binarySearchByAuthor(books, author);
         if (index != -1) {
@@ -76,40 +80,42 @@ public class BookBinarySearch {
         }
     }
 
-    public static int binarySearchByTitle(List<Book> books, String title) {
+    public static int binarySearchByTitle(Stack<Book> books, String title) {
+        List<Book> booksList = new ArrayList<>(books);
         int low = 0;
-        int high = books.size() - 1;
+        int high = booksList.size() - 1;
 
         while (low <= high) {
             int mid = (low + high) / 2;
-            Book midVal = books.get(mid);
-            int cmp = midVal.getTitle().compareTo(title);
-
-            if (cmp < 0)
-                low = mid + 1;
-            else if (cmp > 0)
-                high = mid - 1;
-            else
+            Book midVal = booksList.get(mid);
+            String midTitle = midVal.getTitle().toLowerCase();
+            if (midTitle.contains(title)) {
                 return mid; // Found
+            } else if (midTitle.compareTo(title) < 0) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
         }
         return -1; // Not found
     }
 
-    public static int binarySearchByAuthor(List<Book> books, String author) {
+    public static int binarySearchByAuthor(Stack<Book> books, String author) {
+        List<Book> booksList = new ArrayList<>(books);
         int low = 0;
-        int high = books.size() - 1;
+        int high = booksList.size() - 1;
 
         while (low <= high) {
             int mid = (low + high) / 2;
-            Book midVal = books.get(mid);
-            int cmp = midVal.getAuthor().compareTo(author);
-
-            if (cmp < 0)
-                low = mid + 1;
-            else if (cmp > 0)
-                high = mid - 1;
-            else
+            Book midVal = booksList.get(mid);
+            String midAuthor = midVal.getAuthor().toLowerCase();
+            if (midAuthor.contains(author)) {
                 return mid; // Found
+            } else if (midAuthor.compareTo(author) < 0) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
         }
         return -1; // Not found
     }
