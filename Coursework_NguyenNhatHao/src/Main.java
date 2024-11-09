@@ -10,7 +10,7 @@ public class Main {
         // Adding 5 books to the stack
         stack.push(new Book("Harry Potter", "J.K. Rowling"));
         stack.push(new Book("The Hobbit", "J.R.R. Tolkien"));
-        stack.push(new Book("1984ts", "George Orwell"));
+        stack.push(new Book("c", "George Orwell"));
         stack.push(new Book("The Greats Gatsby", "F. Scott Fitzgerald"));
         stack.push(new Book("To Kill a Mockingbirdts", "Harper Lee"));
 

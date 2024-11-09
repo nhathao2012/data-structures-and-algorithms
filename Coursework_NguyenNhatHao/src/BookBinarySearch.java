@@ -56,7 +56,7 @@ public class BookBinarySearch {
         title = title.toLowerCase();
 
         Stack<Book> books = (Stack<Book>) stack.clone(); // Clone the stack to preserve original order
-        BookMergeSort.sortByTitle(books);
+        BookMergeSort.sortByTitle_stack(books);
 
         int index = binarySearchByTitle(books, title);
         if (index != -1) {
@@ -70,7 +70,7 @@ public class BookBinarySearch {
         author = author.toLowerCase();
 
         Stack<Book> books = (Stack<Book>) stack.clone(); // Clone the stack to preserve original order
-        BookMergeSort.sortByAuthor(books);
+        BookMergeSort.sortByAuthor_stack(books);
 
         int index = binarySearchByAuthor(books, author);
         if (index != -1) {
