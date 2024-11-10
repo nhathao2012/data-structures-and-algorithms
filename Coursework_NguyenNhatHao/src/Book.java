@@ -1,5 +1,4 @@
-import java.util.Stack;
-import java.util.Scanner;
+import java.util.*;
 
 public class Book {
     private static int idCounter = 1;
@@ -82,28 +81,27 @@ public class Book {
     }
 
     private static void removeBook() {
-        if(!stack.isEmpty()) {
+        if (!stack.isEmpty()) {
             listBooks();
             Scanner sc = new Scanner(System.in);
-            System.out.println("Enter the title of the book to remove");
-            String title = sc.nextLine().toLowerCase();
+            System.out.println("Enter the title of the book to remove:");
+            String title = sc.nextLine();
+            title = BookBinarySearch.normalize(title);
+            BookMergeSort.sortByTitleStack(stack);
+            // Use BookBinarySearch to find books with the specified title
+            List<Book> booksToRemove = BookBinarySearch
+                    .binarySearchAllByTitle(stack,title);
 
-            Book bookRemove = null;
-            for (Book book : stack) {
-                if (book.getTitle().toLowerCase().equals(title)) {
-                    bookRemove = book;
-                    break;
+            if (!booksToRemove.isEmpty()) {
+                for (Book book : booksToRemove) {
+                    stack.remove(book);
+                    System.out.println("Book removed: " + book.getTitle());
                 }
-            }
-
-            if (bookRemove != null) {
-                stack.remove(bookRemove);
-                System.out.println("Book removed: "+bookRemove.getTitle());
             } else {
                 System.out.println("Book not found.");
             }
         } else {
-            System.out.println("No book to remove");
+            System.out.println("No book to remove.");
         }
     }
 

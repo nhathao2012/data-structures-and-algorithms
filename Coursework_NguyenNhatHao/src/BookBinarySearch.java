@@ -22,6 +22,7 @@ public class BookBinarySearch {
             System.out.println("Enter next command:");
             command = scanner.nextLine();
         }
+        scanner.close();
     }
 
     private static void handleSearchCommands(String[] args) {
@@ -53,70 +54,117 @@ public class BookBinarySearch {
     }
 
     private static void searchByTitle(String title) {
-        title = title.toLowerCase();
+        title = normalize(title);
 
         Stack<Book> books = (Stack<Book>) stack.clone(); // Clone the stack to preserve original order
-        BookMergeSort.sortByTitle_stack(books);
+        BookMergeSort.sortByTitleStack(books);
 
-        int index = binarySearchByTitle(books, title);
-        if (index != -1) {
-            System.out.println("Book found: " + books.get(index));
+        List<Book> foundBooks = binarySearchAllByTitle(books, title);
+        if (!foundBooks.isEmpty()) {
+            for (Book book : foundBooks) {
+                System.out.println("Book found: " + book);
+            }
         } else {
             System.out.println("Book not found.");
         }
     }
 
     private static void searchByAuthor(String author) {
-        author = author.toLowerCase();
+        author = normalize(author);
 
         Stack<Book> books = (Stack<Book>) stack.clone(); // Clone the stack to preserve original order
-        BookMergeSort.sortByAuthor_stack(books);
+        BookMergeSort.sortByAuthorStack(books);
 
-        int index = binarySearchByAuthor(books, author);
-        if (index != -1) {
-            System.out.println("Book found: " + books.get(index));
+        List<Book> foundBooks = binarySearchAllByAuthor(books, author);
+        if (!foundBooks.isEmpty()) {
+            for (Book book : foundBooks) {
+                System.out.println("Book found: " + book);
+            }
         } else {
             System.out.println("Book not found.");
         }
     }
 
-    public static int binarySearchByTitle(Stack<Book> books, String title) {
+    // Normalize the string by converting to lower case and removing spaces
+    public static String normalize(String input) {
+        return input.toLowerCase().replaceAll("\\s", "");
+    }
+
+    public static List<Book> binarySearchAllByTitle(Stack<Book> books, String title) {
         List<Book> booksList = new ArrayList<>(books);
+        List<Book> result = new ArrayList<>();
         int low = 0;
         int high = booksList.size() - 1;
+        int mid = -1;
 
+        // Standard binary search
         while (low <= high) {
-            int mid = (low + high) / 2;
+            mid = (low + high) / 2;
             Book midVal = booksList.get(mid);
-            String midTitle = midVal.getTitle().toLowerCase();
+            String midTitle = normalize(midVal.getTitle());
+
             if (midTitle.contains(title)) {
-                return mid; // Found
+                break;
             } else if (midTitle.compareTo(title) < 0) {
                 low = mid + 1;
             } else {
                 high = mid - 1;
             }
         }
-        return -1; // Not found
+
+        // If an element was found
+        if (low <= high) {
+            // Scan left of mid for matches
+            int left = mid;
+            while (left >= 0 && normalize(booksList.get(left).getTitle()).contains(title)) {
+                result.add(booksList.get(left--));
+            }
+            // Scan right of mid for matches
+            int right = mid + 1;
+            while (right < booksList.size() && normalize(booksList.get(right).getTitle()).contains(title)) {
+                result.add(booksList.get(right++));
+            }
+        }
+
+        return result;
     }
 
-    public static int binarySearchByAuthor(Stack<Book> books, String author) {
+    public static List<Book> binarySearchAllByAuthor(Stack<Book> books, String author) {
         List<Book> booksList = new ArrayList<>(books);
+        List<Book> result = new ArrayList<>();
         int low = 0;
         int high = booksList.size() - 1;
+        int mid = -1;
 
+        // Standard binary search
         while (low <= high) {
-            int mid = (low + high) / 2;
+            mid = (low + high) / 2;
             Book midVal = booksList.get(mid);
-            String midAuthor = midVal.getAuthor().toLowerCase();
+            String midAuthor = normalize(midVal.getAuthor());
+
             if (midAuthor.contains(author)) {
-                return mid; // Found
+                break;
             } else if (midAuthor.compareTo(author) < 0) {
                 low = mid + 1;
             } else {
                 high = mid - 1;
             }
         }
-        return -1; // Not found
+
+        // If an element was found
+        if (low <= high) {
+            // Scan left of mid for matches
+            int left = mid;
+            while (left >= 0 && normalize(booksList.get(left).getAuthor()).contains(author)) {
+                result.add(booksList.get(left--));
+            }
+            // Scan right of mid for matches
+            int right = mid + 1;
+            while (right < booksList.size() && normalize(booksList.get(right).getAuthor()).contains(author)) {
+                result.add(booksList.get(right++));
+            }
+        }
+
+        return result;
     }
 }
